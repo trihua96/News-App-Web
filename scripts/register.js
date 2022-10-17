@@ -4,57 +4,101 @@
 const validateRegister = function (user) {
   let submitOk = true;
 
+  const firstnameValue = user.firstName.trim();
+  const lastnameValue = user.lastName.trim();
+  const usernameValue = user.username.trim()
+  const passwordValue = user.password.trim()
+  const passConfirmValue = inputPassConfirm.value.trim()
+
   // FirstName validate
-  if (user.firstName.trim() === "") {
-    alert("Empty first name value!");
+  if (firstnameValue === "") {
+    setErrorFor(inputFirstName, "Empty first name value!");
     submitOk = false;
+  } else {
+    setSuccessFor(inputFirstName);
   }
 
   // LastName validate
-  if (user.lastName.trim() === "") {
-    alert("Empty last name value!");
+  if (lastnameValue === "") {
+    setErrorFor(inputLastName, "Empty last name value!");
     submitOk = false;
+  } else {
+    setSuccessFor(inputLastName);
   }
 
   // Username validate
   if (userArr) {
     // UserArr not empty then check unique username
     for (let i = 0; i < userArr.length; i++) {
-      if (user.username.toLowerCase() === userArr[i].username.toLowerCase()) {
-        alert("Username must unique!");
+      if (usernameValue.toLowerCase() === userArr[i].username.toLowerCase()) {
+        setErrorFor(inputUsername, "Username must unique!");
         submitOk = false;
         break;
       }
     }
+  } else {
+    setSuccessFor(inputUsername);
   }
-  if (user.username.trim() === "") {
-    alert("Empty username value!");
+
+  if (usernameValue === "") {
+    setErrorFor(inputUsername, "Empty username value!");
     submitOk = false;
+  } else if(usernameValue.length < 8) {
+    setErrorFor(inputUsername, "Username must 8 characters or more!");
+    submitOk = false;
+  } else {
+    setSuccessFor(inputUsername);
   }
 
   // Password validate
-  if (user.password.trim() === "") {
-    alert("Empty password value!");
+  if (passwordValue === "") {
+    setErrorFor(inputPassword, "Empty password value!");
     submitOk = false;
+  } else {
+    setSuccessFor(inputPassword);
   }
-  if (user.password.length <= 8) {
-    alert("Password must be more than 8 characters!");
+  if (passwordValue.length <= 8) {
+    setErrorFor(inputPassword, "Password must be more than 8 characters!");
     submitOk = false;
+  } else {
+    setSuccessFor(inputPassword);
   }
 
   // Confirm password validate
-  if (inputPassConfirm.value.trim() === "") {
-    alert("Empty password confirm value!");
+  if (passConfirmValue === "") {
+    setErrorFor(inputPassConfirm, "Empty password confirm!");
     submitOk = false;
-  }
-
+  } 
   // Check password = confirm password
-  if (user.password !== inputPassConfirm.value) {
-    alert("confirm password & password must same!");
+  else if (passwordValue !== passConfirmValue) {
+    setErrorFor(inputPassConfirm, "confirm password & password must same!");
     submitOk = false;
+  } else {
+    setSuccessFor(inputPassConfirm);
   }
   return submitOk;
 };
+
+// Catch Error register
+function setErrorFor(input, message)  {  
+  const formContainer = input.parentElement;
+
+  const small = formContainer.querySelector('small');
+  small.innerText = message;
+  // Add error class
+  formContainer.classList.add('error');
+  formContainer.classList.remove('success');
+}
+
+// Catch Success register
+function setSuccessFor(input) {
+  const formContainer = input.parentElement;  
+  const small = formContainer.querySelector('small');
+  small.innerText = "";
+  formContainer.classList.add('success');
+  formContainer.classList.remove('error');
+
+}
 
 // Click event register
 btnSubmit.addEventListener("click", function () {
