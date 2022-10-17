@@ -22,7 +22,7 @@ class UserCl {
   // Get news API
   async getNews(country, category, pageSize, page) {
     try {
-      const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&pageSize=${pageSize}&page=${page}&apiKey=e292bc43ab974ca6bd15a2e6aa3c2e5a`;
+      const url = `https://newsapi.org/v2/top-headlines?country=${country}&category=${category}&pageSize=${pageSize}&page=${page}&apiKey=e292bc43ab974ca6bd15a2e6aa3c2e5a`;      
       // API key: e292bc43ab974ca6bd15a2e6aa3c2e5a
       // API Key: cd6eeb1895ff45f0afdd4e320c054d00
 
@@ -43,7 +43,7 @@ class UserCl {
   // Get Search API
   async getSearch(q, pageSize, page) {
     try {
-      const url = `https://newsapi.in/newsapi/news.php?q=${q}&pageSize=${pageSize}&page=${page}&apiKey=I1xC3j11hghSvRndcabkileANa7qNT`;
+      const url = `https://newsapi.org/v2/everything?q=${q}&pageSize=${pageSize}&page=${page}&apiKey=e292bc43ab974ca6bd15a2e6aa3c2e5a`;
       // API key: e292bc43ab974ca6bd15a2e6aa3c2e5a
       // API Key: cd6eeb1895ff45f0afdd4e320c054d00
 
